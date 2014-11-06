@@ -1,14 +1,7 @@
 (function( $ ) {
 
-	var fetchedQuizzData;
+	var fetchedQuizzData = getQuizz();
 	var currentQuestion;
-
-
-	function getQuizzData()
-	{
-		fetchedQuizzData = getQuizz();
-		displayQuestion(1);
-	};
 
 
 	function getResults(displayContentInDiv) {
@@ -96,7 +89,7 @@
 
 	// ready
 	$(function() {
-		getQuizzData();
+		displayQuestion( 1 );
 
 		console.log( "ready!" );
 	});
