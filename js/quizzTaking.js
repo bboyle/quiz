@@ -31,6 +31,7 @@
 			// add button to page
 			.appendTo( containerDiv );
 
+// TODO use event delegation so it's not necessary to keep creating these event handlers
 	    	$( button ).on('click', function(b){
 				updateAnswer(b);
 			});
