@@ -1,100 +1,104 @@
-var fetchedQuizzData;
-var currentQuestion;
+(function( $ ) {
+
+	var fetchedQuizzData;
+	var currentQuestion;
 
 
-function getQuizzData()
-{
-	fetchedQuizzData = getQuizz();
-	displayQuestion(1);
-};
-
-
-function getResults(displayContentInDiv) {
-	displayContentInDiv.html(markAnswers(fetchedQuizzData));
-};
-
-
-function getPrevQuestion()
-{
-	if (currentQuestion <= 1 )
+	function getQuizzData()
 	{
-		return;
-	}
-	else
-	{
-		displayQuestion(currentQuestion - 1);
-	}
-};
-
-function getNextQuestion()
-{
-	if (currentQuestion >= fetchedQuizzData.QuestionCount)
-	{
-		return;
-	}
-	else
-	{
-		displayQuestion(currentQuestion + 1);
-	}
-};
-
-function displayQuestion(questionNumber)
-{
-	if (questionNumber < 1 || questionNumber > fetchedQuizzData.QuestionCount)
-	{
-		return;
-	}
-
-	var currentQuestionData = fetchedQuizzData.Questions[questionNumber - 1];
-
-	var containerDiv = document.createElement('div');
-
-	var textDiv = document.createElement('div');
-	var text = document.createTextNode(currentQuestionData.Question); 
-	textDiv.appendChild(text);
-	containerDiv.appendChild(textDiv);
-
-	for (i = 0; i < currentQuestionData.AnswerCount; i++) {
-    	var button = document.createElement('button');
-		$( button ).val(i+1);
-    	$( button ).on('click', function(b){
-			updateAnswer(b);
-		});
-		
-		$(button).text(currentQuestionData.Answers[i]);
-		containerDiv.appendChild(button);
+		fetchedQuizzData = getQuizz();
+		displayQuestion(1);
 	};
 
-	$( "#quizzContent" ).html(containerDiv);
-	currentQuestion = questionNumber;
-};
 
-function updateAnswer(button)
-{
-	var currentQuestionData = fetchedQuizzData.Questions[currentQuestion - 1];
+	function getResults(displayContentInDiv) {
+		displayContentInDiv.html(markAnswers(fetchedQuizzData));
+	};
 
-	currentQuestionData.UserAnswered = $(button.target).attr("value");
-	console.log( "answer clciked!" );
 
-	progress();
-};
-
-function progress()
-{
-	if (currentQuestion >= fetchedQuizzData.QuestionCount)
+	function getPrevQuestion()
 	{
-		getResults($( "#quizzContent" ));
-	}
-	else
+		if (currentQuestion <= 1 )
+		{
+			return;
+		}
+		else
+		{
+			displayQuestion(currentQuestion - 1);
+		}
+	};
+
+	function getNextQuestion()
 	{
-		displayQuestion(currentQuestion + 1);
+		if (currentQuestion >= fetchedQuizzData.QuestionCount)
+		{
+			return;
+		}
+		else
+		{
+			displayQuestion(currentQuestion + 1);
+		}
+	};
+
+	function displayQuestion(questionNumber)
+	{
+		if (questionNumber < 1 || questionNumber > fetchedQuizzData.QuestionCount)
+		{
+			return;
+		}
+
+		var currentQuestionData = fetchedQuizzData.Questions[questionNumber - 1];
+
+		var containerDiv = document.createElement('div');
+
+		var textDiv = document.createElement('div');
+		var text = document.createTextNode(currentQuestionData.Question); 
+		textDiv.appendChild(text);
+		containerDiv.appendChild(textDiv);
+
+		for (i = 0; i < currentQuestionData.AnswerCount; i++) {
+	    	var button = document.createElement('button');
+			$( button ).val(i+1);
+	    	$( button ).on('click', function(b){
+				updateAnswer(b);
+			});
+			
+			$(button).text(currentQuestionData.Answers[i]);
+			containerDiv.appendChild(button);
+		};
+
+		$( "#quizzContent" ).html(containerDiv);
+		currentQuestion = questionNumber;
+	};
+
+	function updateAnswer(button)
+	{
+		var currentQuestionData = fetchedQuizzData.Questions[currentQuestion - 1];
+
+		currentQuestionData.UserAnswered = $(button.target).attr("value");
+		console.log( "answer clciked!" );
+
+		progress();
+	};
+
+	function progress()
+	{
+		if (currentQuestion >= fetchedQuizzData.QuestionCount)
+		{
+			getResults($( "#quizzContent" ));
+		}
+		else
+		{
+			displayQuestion(currentQuestion + 1);
+		}
 	}
-}
 
 
-// ready
-$(function() {
-	getQuizzData();
+	// ready
+	$(function() {
+		getQuizzData();
 
-	console.log( "ready!" );
-});
+		console.log( "ready!" );
+	});
+
+}( jQuery ));
