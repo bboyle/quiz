@@ -1,13 +1,6 @@
 var fetchedQuizzData;
 var currentQuestion;
 
-$(function() {
-	getQuizzData();
-
-
-
-	console.log( "ready!" );
-});
 
 function getQuizzData()
 {
@@ -97,3 +90,11 @@ function progress()
 		displayQuestion(currentQuestion + 1);
 	}
 }
+
+
+// ready
+$(function() {
+	getQuizzData();
+
+	console.log( "ready!" );
+});
