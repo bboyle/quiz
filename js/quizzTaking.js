@@ -22,14 +22,18 @@
 		containerDiv.appendChild(textDiv);
 
 		for (i = 0; i < currentQuestionData.AnswerCount; i++) {
-	    	var button = document.createElement('button');
-			$( button ).val(i+1);
+	    	// create a new button
+			$( '<button/>' )
+			// set the value
+			.val( i + 1 )
+			// button label
+			.text( currentQuestionData.Answers[ i ])
+			// add button to page
+			.appendTo( containerDiv );
+
 	    	$( button ).on('click', function(b){
 				updateAnswer(b);
 			});
-			
-			$(button).text(currentQuestionData.Answers[i]);
-			containerDiv.appendChild(button);
 		};
 
 		$( "#quizzContent" ).html(containerDiv);
