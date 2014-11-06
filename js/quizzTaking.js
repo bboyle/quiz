@@ -4,37 +4,9 @@
 	var currentQuestion;
 
 
-	function getResults(displayContentInDiv) {
-		displayContentInDiv.html(markAnswers(fetchedQuizzData));
-	};
-
-
-	function getPrevQuestion()
-	{
-		if (currentQuestion <= 1 )
-		{
-			return;
-		}
-		else
-		{
-			displayQuestion(currentQuestion - 1);
-		}
-	};
-
-	function getNextQuestion()
-	{
-		if (currentQuestion >= fetchedQuizzData.QuestionCount)
-		{
-			return;
-		}
-		else
-		{
-			displayQuestion(currentQuestion + 1);
-		}
-	};
-
 	function displayQuestion(questionNumber)
 	{
+		// check question number is valid
 		if (questionNumber < 1 || questionNumber > fetchedQuizzData.QuestionCount)
 		{
 			return;
@@ -62,6 +34,36 @@
 
 		$( "#quizzContent" ).html(containerDiv);
 		currentQuestion = questionNumber;
+	};
+
+
+	function getResults(displayContentInDiv) {
+		displayContentInDiv.html(markAnswers(fetchedQuizzData));
+	};
+
+
+	function getPrevQuestion()
+	{
+		if (currentQuestion <= 1 )
+		{
+			return;
+		}
+		else
+		{
+			displayQuestion(currentQuestion - 1);
+		}
+	};
+
+	function getNextQuestion()
+	{
+		if (currentQuestion >= fetchedQuizzData.QuestionCount)
+		{
+			return;
+		}
+		else
+		{
+			displayQuestion(currentQuestion + 1);
+		}
 	};
 
 	function updateAnswer(button)
